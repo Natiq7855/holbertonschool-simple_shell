@@ -10,5 +10,6 @@
 
 /* Function Prototypes */
 void handle_input(char *line, char *shell_name);
+extern char **environ;
 void execute_cmd(char *command);
 #endif
