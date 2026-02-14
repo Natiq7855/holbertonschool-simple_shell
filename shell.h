@@ -10,5 +10,5 @@
 
 /* Function Prototypes */
 void handle_input(char *line, char *shell_name);
-
+void execute_cmd(char *command);
 #endif
