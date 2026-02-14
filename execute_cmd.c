@@ -2,17 +2,18 @@
 
 /**
  * execute_cmd - Forks a process to execute a command.
- * @command: The full path to the executable.
- *
- * Return: Void.
+ * @line: The raw input string from getline.
  */
-void execute_cmd(char *command)
+void execute_cmd(char *line)
 {
 	pid_t child_pid;
 	int status;
 	char *args[2];
+	char *command;
 
-	if (command[0] == '\0')
+	command = strtok(line, " \t\r\n");
+	
+	if (command == NULL)
 		return;
 
 	args[0] = command;
@@ -24,7 +25,6 @@ void execute_cmd(char *command)
 		perror("Error");
 		return;
 	}
-
 	if (child_pid == 0)
 	{
 		if (execve(args[0], args, environ) == -1)
