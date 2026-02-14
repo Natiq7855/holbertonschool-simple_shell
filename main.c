@@ -16,11 +16,8 @@ int main(int ac, char **av)
 
 	while (1)
 	{
-		/* 1. Display prompt only in interactive mode */
 		if (isatty(STDIN_FILENO))
 			write(STDOUT_FILENO, "$ ", 2);
-
-		/* 2. Read input from user */
 		nread = getline(&line, &len, stdin);
 		if (nread == -1)
 		{
@@ -30,7 +27,6 @@ int main(int ac, char **av)
 			exit(EXIT_SUCCESS);
 		}
 
-		/* 3. Handle the input (Placeholder for parsing and execution) */
 		handle_input(line, av[0]);
 	}
 
