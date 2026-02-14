@@ -1,24 +1,23 @@
 #include "shell.h"
 
 /**
- * main - Entry point for the simple shell.
- * @ac: Argument count.
- * @av: Argument vector.
+ * main - Entry point for the shell.
  *
- * Return: 0 on success, or the exit status of the last command.
+ * Return: Always 0.
  */
-int main(int ac, char **av)
+int main(void)
 {
 	char *line = NULL;
 	size_t len = 0;
 	ssize_t nread;
-	(void)ac;
 
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
-			write(STDOUT_FILENO, "$ ", 2);
+			write(STDOUT_FILENO, "#cisfun$ ", 9);
+
 		nread = getline(&line, &len, stdin);
+		
 		if (nread == -1)
 		{
 			if (isatty(STDIN_FILENO))
@@ -27,7 +26,9 @@ int main(int ac, char **av)
 			exit(EXIT_SUCCESS);
 		}
 
-		handle_input(line, av[0]);
+		if (line[nread - 1] == '\n')
+			line[nread - 1] = '\0';
+		execute_cmd(line);
 	}
 
 	free(line);
